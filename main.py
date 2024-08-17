@@ -178,9 +178,14 @@ def main():
                     response = ai(voice_command)
                     print(response)
                     say(response)
+                elif "shutdown".lower() in voice_command.lower():
+                    print("Shutting Down.....")
+                    say("Shutting Down master")
+                    exit()
                 elif "shut down".lower() in voice_command.lower():
                     print("Shutting Down.....")
                     say("Shutting Down master")
+                    exit()
                 else:
                     print("Unknown command master")
                     say("Unknown command master")

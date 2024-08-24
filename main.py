@@ -91,8 +91,8 @@ def open_sites(voice_command_sites):
         "youtube": "https://www.youtube.com/",
         "chess.com": "https://www.chess.com/",
         "whatsapp":"https://web.whatsapp.com/",
-        " our school website":"https://web.whatsapp.com/",
-        " something funny":"https://www.youtube.com/watch?v=7CGTpoenPlE",
+        "our school website":"",
+        
         # Add mores here
     }
     for site, url in sites.items():
@@ -109,8 +109,6 @@ def open_teach(voice_command_sites):
     sites = {
         "me vector":"https://www.youtube.com/watch?v=ihNZlp7iUHE&list=PLyKp6ofGqsBPNLnBmCipjd5BynNJoPFMt" ,              
         "me mole concept":"https://www.youtube.com/watch?v=Rd4a1X3B61w&list=PL2ub1_oKCn7ogeyU-Rqze_Jvnam0qCNYn",
-
-        
         # Add mores here
     }
     for site, url in sites.items():
@@ -122,6 +120,18 @@ def open_teach(voice_command_sites):
             except Exception as e:
                 print(f"Error opening {site.capitalize()}: {e}")
             return
+def play_something():
+    somethings={
+        "something":"https://www.youtube.com/watch?v=7CGTpoenPlE",
+    }
+    for something,url in somethings.items():
+        try:
+            webbrowser.open(url)
+            print(f"Opening{something.capiitalize():{url}}")
+            say(f"Opening {something.capitalize()}:{e}")
+        except Exception as e:
+            print(f"Error Opening {site.capitalize()}:{e}")
+        return
 
 def play_music():
     try:
@@ -153,7 +163,7 @@ def open_app(voice_command_app):
                 print(f"Opening {app_name.capitalize()}: {location}")
                 say(f"Opening {app_name.capitalize()} master")
             except Exception as e:
-                print(f"Error opening {app_name.capitalize()}: {e}")
+                print(f"Eror opening {app_name.capitalize()}: {e}")
             return
 
 def main():
@@ -174,10 +184,12 @@ def main():
                     play_music()
                 elif "what's the time" in voice_command.lower():
                     tell_time()
-                elif "intelligence".lower() in voice_command.lower():
+                elif "Open A I".lower() in voice_command.lower():
                     response = ai(voice_command)
                     print(response)
                     say(response)
+                elif "play something".lower() in voice_command.lower():
+                    play_something()
                 elif "shutdown".lower() in voice_command.lower():
                     print("Shutting Down.....")
                     say("Shutting Down master")

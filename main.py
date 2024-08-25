@@ -6,8 +6,9 @@ import openai
 from config import apikey
 import datetime
 import random
-
+from data import sites
 def ai(prompt):
+
     openai.api_key = apikey
     text = f"OpenAI response for Prompt: {prompt} \n *************************\n\n"
 
@@ -35,6 +36,7 @@ def ai(prompt):
         f.write(text)
 
     return text
+
 def say(text):
     # Escape double quotes in the text
     text = text.replace('"', '""')
@@ -86,15 +88,7 @@ def takecommand():
             return "None"
         
 def open_sites(voice_command_sites):
-    sites = {
-        "wikipedia": "https://www.wikipedia.org/",
-        "youtube": "https://www.youtube.com/",
-        "chess.com": "https://www.chess.com/",
-        "whatsapp":"https://web.whatsapp.com/",
-        "our school website":"",
-        
-        # Add mores here
-    }
+   
     for site, url in sites.items():
         if site in voice_command_sites.lower():
             try:
@@ -106,11 +100,7 @@ def open_sites(voice_command_sites):
             return
 
 def open_teach(voice_command_sites):
-    sites = {
-        "me vector":"https://www.youtube.com/watch?v=ihNZlp7iUHE&list=PLyKp6ofGqsBPNLnBmCipjd5BynNJoPFMt" ,              
-        "me mole concept":"https://www.youtube.com/watch?v=Rd4a1X3B61w&list=PL2ub1_oKCn7ogeyU-Rqze_Jvnam0qCNYn",
-        # Add mores here
-    }
+
     for site, url in sites.items():
         if site in voice_command_sites.lower():
             try:
@@ -120,6 +110,7 @@ def open_teach(voice_command_sites):
             except Exception as e:
                 print(f"Error opening {site.capitalize()}: {e}")
             return
+
 def play_something():
     somethings={
         "something":"https://www.youtube.com/watch?v=7CGTpoenPlE",
@@ -130,7 +121,7 @@ def play_something():
             print(f"Opening{something.capiitalize():{url}}")
             say(f"Opening {something.capitalize()}:{e}")
         except Exception as e:
-            print(f"Error Opening {site.capitalize()}:{e}")
+            print(f"Error Opening {something.capitalize()}:{e}")
         return
 
 def play_music():
@@ -153,7 +144,6 @@ def open_app(voice_command_app):
     app = {
         "brave": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
         "control pannel": "C:\\Windows\\System32\\control.exe",
-            
         }
         
     for app_name, location in app.items():
@@ -167,43 +157,45 @@ def open_app(voice_command_app):
             return
 
 def main():
-    print('Welcome to Jarvis A.I')
-    say("Master I am Jarvis A I")
     while True:
         try:
             voice_command = takecommand()
             query = voice_command
             if voice_command is not None:
-                if "open" in voice_command.lower():
-                    open_sites(voice_command)
-                elif "teach" in voice_command.lower():
-                    open_teach(voice_command)
-                elif "run" in voice_command.lower():
-                    open_app(voice_command)
-                elif "play music" in voice_command.lower():
-                    play_music()
-                elif "what's the time" in voice_command.lower():
-                    tell_time()
-                elif "Open A I".lower() in voice_command.lower():
-                    response = ai(voice_command)
-                    print(response)
-                    say(response)
-                elif "play something".lower() in voice_command.lower():
-                    play_something()
-                elif "shutdown".lower() in voice_command.lower():
-                    print("Shutting Down.....")
-                    say("Shutting Down master")
-                    exit()
-                elif "shut down".lower() in voice_command.lower():
-                    print("Shutting Down.....")
-                    say("Shutting Down master")
-                    exit()
+                if "wake up" in voice_command.lower():
+                    print('Welcome to Jarvis A.I')
+                    say("Master I am Jarvis A I")
+                    if "open" in voice_command.lower():
+                        open_sites(voice_command)
+                    elif "teach" in voice_command.lower():
+                        open_teach(voice_command)
+                    elif "run" in voice_command.lower():
+                        open_app(voice_command)
+                    elif "play music" in voice_command.lower():
+                        play_music()
+                    elif "what's the time" in voice_command.lower():
+                        tell_time()
+                    elif "Open A I".lower() in voice_command.lower():
+                        response = ai(voice_command)
+                        print(response)
+                        say(response)
+                    elif "play something".lower() in voice_command.lower():
+                        play_something()
+                    elif "sleep".lower() in voice_command.lower():
+                        print("going to sleep.....")
+                        say("going to sleep")
+                        exit()
+                    elif "shut down".lower() in voice_command.lower():
+                        print("Shutting Down.....")
+                        say("Shutting Down master")
+                        exit()
+                    else:
+                        print("Unknown command master")
+                        say("Unknown command master")
                 else:
-                    print("Unknown command master")
-                    say("Unknown command master")
-
+                    say("I am sleeping master let me sleep")
+                    print("I am sleeping master let me sleep")
         except Exception as e:
             print(f"Error: {e}")
-
 if __name__ == '__main__':
     main()
